@@ -11,4 +11,4 @@
 
 
 # Модель данных
-![модель_самокаты](https://user-images.githubusercontent.com/104301958/198287038-1b643984-ebb9-4f95-bbea-e43dfb60cf92.jpg)
+![модель_самокаты](https://user-images.githubusercontent.com/104301958/198608897-a9d182ad-fb1c-4324-aae0-59d23bcebb59.jpg)
