@@ -14,6 +14,7 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+app.UseSerilogConfiguration();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
