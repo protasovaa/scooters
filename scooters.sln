@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scooters.WebAPI", "scooters.WebAPI\scooters.WebAPI.csproj", "{922DBB0A-F09F-4A38-B370-9E8A76E70A3E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scooters.Repository", "scooters.Repository\scooters.Repository.csproj", "{BAC332E2-DDDF-4275-9994-17850871705F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{922DBB0A-F09F-4A38-B370-9E8A76E70A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{922DBB0A-F09F-4A38-B370-9E8A76E70A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{922DBB0A-F09F-4A38-B370-9E8A76E70A3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAC332E2-DDDF-4275-9994-17850871705F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAC332E2-DDDF-4275-9994-17850871705F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAC332E2-DDDF-4275-9994-17850871705F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAC332E2-DDDF-4275-9994-17850871705F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
