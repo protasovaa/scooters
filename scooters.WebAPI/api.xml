@@ -4,50 +4,254 @@
         <name>scooters.WebAPI</name>
     </assembly>
     <members>
+        <member name="M:scooters.WebAPI.AppConfig.ServicesExtensions.ServicesExtensions.AddDbContextConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Add serilog configuration
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:scooters.WebAPI.AppConfig.ServicesExtensions.ServicesExtensions.AddMapperConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add serilog configuration
+            </summary>
+            <param name="builder"></param>
+        </member>
         <member name="M:scooters.WebAPI.AppConfig.ServicesExtensions.ServicesExtensions.AddSwaggerConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             Add swagger settings
             </summary>
             <param name="services"></param>
         </member>
-        <member name="M:scooters.WebAPI.AppConfiguration.ServicesExtensions.ServicesExtensions.AddDbContextConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            Add serilog configuration
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="T:scooters.WebAPI.Controllers.UsersController">
+        <member name="T:scooters.WebAPI.Controllers.AdminController">
             <summary>
             </summary>
         </member>
-        <member name="M:scooters.WebAPI.Controllers.UsersController.#ctor(scooters.Repository.IRepository{scooters.Entities.Models.User})">
+        <member name="M:scooters.WebAPI.Controllers.AdminController.#ctor(scooters.Services.Abstract.IAdminService,AutoMapper.IMapper)">
             <summary>
-            Users controller
+            admin controller
             </summary>
         </member>
-        <member name="M:scooters.WebAPI.Controllers.UsersController.GetUsers">
+        <!-- Badly formed XML comment ignored for member "M:scooters.WebAPI.Controllers.AdminController.CreateAdmin(scooters.Services.Models.AdminModel)" -->
+        <member name="M:scooters.WebAPI.Controllers.AdminController.GetAdmins(System.Int32,System.Int32)">
             <summary>
-            Get users
+            Get admin by pages
             </summary>
             <returns></returns>
         </member>
-        <member name="M:scooters.WebAPI.Controllers.UsersController.DeleteUsers(scooters.Entities.Models.User)">
+        <member name="M:scooters.WebAPI.Controllers.AdminController.DeleteAdmin(System.Guid)">
             <summary>
-            Delete users
+            Delete admin
             </summary>
-            <param name="users"></param>
         </member>
-        <member name="M:scooters.WebAPI.Controllers.UsersController.PostUsers(scooters.Entities.Models.User)">
+        <member name="M:scooters.WebAPI.Controllers.AdminController.GetAdmin(System.Guid)">
             <summary>
-            Post users
+            Get admin
             </summary>
-            <param name="users"></param>
         </member>
-        <member name="M:scooters.WebAPI.Controllers.UsersController.Updatesers(scooters.Entities.Models.User)">
+        <member name="M:scooters.WebAPI.Controllers.AdminController.UpdateAdmin(System.Guid,scooters.WebAPI.Models.UpdateAdminRequest)">
             <summary>
-            Update users
+            Update admin
             </summary>
-            <param name="users"></param>
+        </member>
+        <member name="T:scooters.WebAPI.Controllers.BookingController">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.BookingController.#ctor(scooters.Services.Abstract.IBookingService,AutoMapper.IMapper)">
+            <summary>
+            Booking controller
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.BookingController.CreateBooking(scooters.WebAPI.Models.CreateBookingRequest)">
+            <summary>
+            create booking
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.BookingController.GetBookings(System.Int32,System.Int32)">
+            <summary>
+            Get Booking by pages
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.BookingController.DeleteBooking(System.Guid)">
+            <summary>
+            Delete Booking
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.BookingController.GetBooking(System.Guid)">
+            <summary>
+            Get Booking
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.BookingController.UpdateBooking(System.Guid,scooters.WebAPI.Models.UpdateBookingRequest)">
+            <summary>
+            Update Booking
+            </summary>
+        </member>
+        <member name="T:scooters.WebAPI.Controllers.CityController">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.CityController.#ctor(scooters.Services.Abstract.ICityService,AutoMapper.IMapper)">
+            <summary>
+            City controller
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:scooters.WebAPI.Controllers.CityController.CreateCity(scooters.Services.Models.CityModel)" -->
+        <member name="M:scooters.WebAPI.Controllers.CityController.GetCitys(System.Int32,System.Int32)">
+            <summary>
+            Get City by pages
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.CityController.DeleteCity(System.Guid)">
+            <summary>
+            Delete City
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.CityController.GetCity(System.Guid)">
+            <summary>
+            Get City
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.CityController.UpdateCity(System.Guid,scooters.WebAPI.Models.UpdateCityRequest)">
+            <summary>
+            Update City
+            </summary>
+        </member>
+        <member name="T:scooters.WebAPI.Controllers.PenaltyController">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.PenaltyController.#ctor(scooters.Services.Abstract.IPenaltyService,AutoMapper.IMapper)">
+            <summary>
+            Penalty controller
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:scooters.WebAPI.Controllers.PenaltyController.CreatePenalty(scooters.Services.Models.PenaltyModel)" -->
+        <member name="M:scooters.WebAPI.Controllers.PenaltyController.GetPenaltys(System.Int32,System.Int32)">
+            <summary>
+            Get Penalty by pages
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.PenaltyController.DeletePenalty(System.Guid)">
+            <summary>
+            Delete Penalty
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.PenaltyController.GetPenalty(System.Guid)">
+            <summary>
+            Get Penalty
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.PenaltyController.UpdatePenalty(System.Guid,scooters.WebAPI.Models.UpdatePenaltyRequest)">
+            <summary>
+            Update Penalty
+            </summary>
+        </member>
+        <member name="T:scooters.WebAPI.Controllers.ScooterController">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.ScooterController.#ctor(scooters.Services.Abstract.IScooterService,AutoMapper.IMapper)">
+            <summary>
+            Scooter controller
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.ScooterController.CreateScooter(scooters.WebAPI.Models.CreateScooterRequest)">
+            <summary>
+            create scooter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.ScooterController.GetScooters(System.Int32,System.Int32)">
+            <summary>
+            Get Scooter by pages
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.ScooterController.DeleteScooter(System.Guid)">
+            <summary>
+            Delete Scooter
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.ScooterController.GetScooter(System.Guid)">
+            <summary>
+            Get Scooter
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.ScooterController.UpdateScooter(System.Guid,scooters.WebAPI.Models.UpdateScooterRequest)">
+            <summary>
+            Update Scooter
+            </summary>
+        </member>
+        <member name="T:scooters.WebAPI.Controllers.UserPenaltyController">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.UserPenaltyController.#ctor(scooters.Services.Abstract.IUserPenaltyService,AutoMapper.IMapper)">
+            <summary>
+            UserPenalty controller
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.UserPenaltyController.CreateBooking(scooters.WebAPI.Models.CreateUserPenaltyRequest)">
+            <summary>
+            create userPenalty
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.UserPenaltyController.GetUserPenaltys(System.Int32,System.Int32)">
+            <summary>
+            Get UserPenalty by pages
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.UserPenaltyController.DeleteUserPenalty(System.Guid)">
+            <summary>
+            Delete UserPenalty
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.UserPenaltyController.GetUserPenalty(System.Guid)">
+            <summary>
+            Get UserPenalty
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.UserPenaltyController.UpdateUserPenalty(System.Guid,scooters.WebAPI.Models.UpdateUserPenaltyRequest)">
+            <summary>
+            Update UserPenalty
+            </summary>
+        </member>
+        <member name="T:scooters.WebAPI.Controllers.UserController">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.UserController.#ctor(scooters.Services.Abstract.IUserService,AutoMapper.IMapper)">
+            <summary>
+            User controller
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.UserController.GetUsers(System.Int32,System.Int32)">
+            <summary>
+            Get User by pages
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.UserController.DeleteUser(System.Guid)">
+            <summary>
+            Delete User
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.UserController.GetUser(System.Guid)">
+            <summary>
+            Get User
+            </summary>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.UserController.UpdateUser(System.Guid,scooters.WebAPI.Models.UpdateUserRequest)">
+            <summary>
+            Update User
+            </summary>
         </member>
     </members>
 </doc>

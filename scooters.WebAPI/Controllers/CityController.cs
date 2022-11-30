@@ -12,44 +12,54 @@ namespace scooters.WebAPI.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class CityController : ControllerBase
     {
-        private readonly IUserService UserService;
+        private readonly ICityService CityService;
         private readonly IMapper mapper;
 
         /// <summary>
-        /// User controller
+        /// City controller
         /// </summary>
-        public UserController(IUserService  UserService,IMapper mapper)
+        public CityController(ICityService  CityService,IMapper mapper)
         {
-            this.UserService=UserService;
+            this.CityService=CityService;
             this.mapper=mapper;
+        }
+        // <summary>
+        /// create city
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult CreateCity([FromBody] CityModel city)   
+        {
+            var response =CityService.CreateCity(city);
+            return Ok(response);
         }
 
         
         /// <summary>
-        /// Get User by pages
+        /// Get City by pages
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         
-        public IActionResult GetUsers([FromQuery] int limit = 20, [FromQuery] int offset = 0)
+        public IActionResult GetCitys([FromQuery] int limit = 20, [FromQuery] int offset = 0)
         {
-            var pageModel =UserService.GetUsers(limit,offset);
+            var pageModel =CityService.GetCitys(limit,offset);
 
-            return Ok(mapper.Map<PageResponse<UserResponse>>(pageModel));
+            return Ok(mapper.Map<PageResponse<CityResponse>>(pageModel));
         }
         /// <summary>
-        /// Delete User
+        /// Delete City
         /// </summary>
     
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult DeleteUser([FromRoute] Guid id)
+        public IActionResult DeleteCity([FromRoute] Guid id)
         {
             try
             {
-                UserService.DeleteUser(id);
+                CityService.DeleteCity(id);
                 return Ok();
             }
             catch(Exception ex)
@@ -58,16 +68,16 @@ namespace scooters.WebAPI.Controllers
             }
         }
         /// <summary>
-        /// Get User
+        /// Get City
         /// </summary>
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetUser([FromRoute] Guid id)
+        public IActionResult GetCity([FromRoute] Guid id)
         {
             try
             {
-                var UserModel =UserService.GetUser(id);
-                return Ok(mapper.Map<UserResponse>(UserModel));
+                var CityModel =CityService.GetCity(id);
+                return Ok(mapper.Map<CityResponse>(CityModel));
             }
             catch (Exception ex)
             {
@@ -75,11 +85,11 @@ namespace scooters.WebAPI.Controllers
             }
         }
         /// <summary>
-        /// Update User
+        /// Update City
         /// </summary>
         [HttpPut]
         [Route("{id}")]
-        public IActionResult UpdateUser([FromRoute] Guid id, [FromBody] UpdateUserRequest model)
+        public IActionResult UpdateCity([FromRoute] Guid id, [FromBody] UpdateCityRequest model)
         {
            var validationResult =model.Validate();
            if(!validationResult.IsValid)
@@ -88,8 +98,8 @@ namespace scooters.WebAPI.Controllers
            }
            try
            {
-            var resultModel =UserService.UpdateUser(id,mapper.Map<UpdateUserModel>(model));
-            return Ok(mapper.Map<UserResponse>(resultModel));
+            var resultModel =CityService.UpdateCity(id,mapper.Map<UpdateCityModel>(model));
+            return Ok(mapper.Map<CityResponse>(resultModel));
            }
            catch(Exception ex)
            {

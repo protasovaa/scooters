@@ -1,10 +1,8 @@
+using scooters.Repository;
+using scooters.Services;
 using scooters.WebAPI.AppConfig.ServicesExtensions;
 using scooters.WebAPI.AppConfig.ApplicationExtensions;
-using scooters.WebAPI.AppConfiguration.ServicesExtensions;
-using scooters.Entities;
-using Microsoft.EntityFrameworkCore;
 using Serilog;
-using scooters.Repository;
 
 
 var configuration = new ConfigurationBuilder()
@@ -12,15 +10,16 @@ var configuration = new ConfigurationBuilder()
 .Build();
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.AddSerilogConfiguration();
 builder.Services.AddDbContextConfiguration(configuration);
 builder.Services.AddVersioningConfiguration();
+builder.Services.AddMapperConfiguration();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerConfiguration();
+builder.Services.AddRepositoryConfiguration();
+builder.Services.AddBusinessLogicConfiguration();
 
-//temporary
-builder.Services.AddScoped<DbContext, Context>();
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 

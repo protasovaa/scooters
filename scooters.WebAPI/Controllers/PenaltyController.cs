@@ -12,44 +12,54 @@ namespace scooters.WebAPI.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class PenaltyController : ControllerBase
     {
-        private readonly IUserService UserService;
+        private readonly IPenaltyService PenaltyService;
         private readonly IMapper mapper;
 
         /// <summary>
-        /// User controller
+        /// Penalty controller
         /// </summary>
-        public UserController(IUserService  UserService,IMapper mapper)
+        public PenaltyController(IPenaltyService  PenaltyService,IMapper mapper)
         {
-            this.UserService=UserService;
+            this.PenaltyService=PenaltyService;
             this.mapper=mapper;
+        }
+        // <summary>
+        /// create penalty
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult CreatePenalty([FromBody] PenaltyModel penalty)   
+        {
+            var response =PenaltyService.CreatePenalty(penalty);
+            return Ok(response);
         }
 
         
         /// <summary>
-        /// Get User by pages
+        /// Get Penalty by pages
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         
-        public IActionResult GetUsers([FromQuery] int limit = 20, [FromQuery] int offset = 0)
+        public IActionResult GetPenaltys([FromQuery] int limit = 20, [FromQuery] int offset = 0)
         {
-            var pageModel =UserService.GetUsers(limit,offset);
+            var pageModel =PenaltyService.GetPenaltys(limit,offset);
 
-            return Ok(mapper.Map<PageResponse<UserResponse>>(pageModel));
+            return Ok(mapper.Map<PageResponse<PenaltyResponse>>(pageModel));
         }
         /// <summary>
-        /// Delete User
+        /// Delete Penalty
         /// </summary>
     
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult DeleteUser([FromRoute] Guid id)
+        public IActionResult DeletePenalty([FromRoute] Guid id)
         {
             try
             {
-                UserService.DeleteUser(id);
+                PenaltyService.DeletePenalty(id);
                 return Ok();
             }
             catch(Exception ex)
@@ -58,16 +68,16 @@ namespace scooters.WebAPI.Controllers
             }
         }
         /// <summary>
-        /// Get User
+        /// Get Penalty
         /// </summary>
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetUser([FromRoute] Guid id)
+        public IActionResult GetPenalty([FromRoute] Guid id)
         {
             try
             {
-                var UserModel =UserService.GetUser(id);
-                return Ok(mapper.Map<UserResponse>(UserModel));
+                var PenaltyModel =PenaltyService.GetPenalty(id);
+                return Ok(mapper.Map<PenaltyResponse>(PenaltyModel));
             }
             catch (Exception ex)
             {
@@ -75,11 +85,11 @@ namespace scooters.WebAPI.Controllers
             }
         }
         /// <summary>
-        /// Update User
+        /// Update Penalty
         /// </summary>
         [HttpPut]
         [Route("{id}")]
-        public IActionResult UpdateUser([FromRoute] Guid id, [FromBody] UpdateUserRequest model)
+        public IActionResult UpdatePenalty([FromRoute] Guid id, [FromBody] UpdatePenaltyRequest model)
         {
            var validationResult =model.Validate();
            if(!validationResult.IsValid)
@@ -88,8 +98,8 @@ namespace scooters.WebAPI.Controllers
            }
            try
            {
-            var resultModel =UserService.UpdateUser(id,mapper.Map<UpdateUserModel>(model));
-            return Ok(mapper.Map<UserResponse>(resultModel));
+            var resultModel =PenaltyService.UpdatePenalty(id,mapper.Map<UpdatePenaltyModel>(model));
+            return Ok(mapper.Map<PenaltyResponse>(resultModel));
            }
            catch(Exception ex)
            {

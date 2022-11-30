@@ -12,44 +12,54 @@ namespace scooters.WebAPI.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class AdminController : ControllerBase
     {
-        private readonly IUserService UserService;
+        private readonly IAdminService adminService;
         private readonly IMapper mapper;
 
         /// <summary>
-        /// User controller
+        /// admin controller
         /// </summary>
-        public UserController(IUserService  UserService,IMapper mapper)
+        public AdminController(IAdminService  adminService,IMapper mapper)
         {
-            this.UserService=UserService;
+            this.adminService=adminService;
             this.mapper=mapper;
+        }
+        // <summary>
+        /// create admin
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult CreateAdmin([FromBody] AdminModel admin)   
+        {
+            var response =adminService.CreateAdmin(admin);
+            return Ok(response);
         }
 
         
         /// <summary>
-        /// Get User by pages
+        /// Get admin by pages
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         
-        public IActionResult GetUsers([FromQuery] int limit = 20, [FromQuery] int offset = 0)
+        public IActionResult GetAdmins([FromQuery] int limit = 20, [FromQuery] int offset = 0)
         {
-            var pageModel =UserService.GetUsers(limit,offset);
+            var pageModel =adminService.GetAdmins(limit,offset);
 
-            return Ok(mapper.Map<PageResponse<UserResponse>>(pageModel));
+            return Ok(mapper.Map<PageResponse<AdminResponse>>(pageModel));
         }
         /// <summary>
-        /// Delete User
+        /// Delete admin
         /// </summary>
     
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult DeleteUser([FromRoute] Guid id)
+        public IActionResult DeleteAdmin([FromRoute] Guid id)
         {
             try
             {
-                UserService.DeleteUser(id);
+                adminService.DeleteAdmin(id);
                 return Ok();
             }
             catch(Exception ex)
@@ -58,16 +68,16 @@ namespace scooters.WebAPI.Controllers
             }
         }
         /// <summary>
-        /// Get User
+        /// Get admin
         /// </summary>
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetUser([FromRoute] Guid id)
+        public IActionResult GetAdmin([FromRoute] Guid id)
         {
             try
             {
-                var UserModel =UserService.GetUser(id);
-                return Ok(mapper.Map<UserResponse>(UserModel));
+                var adminModel =adminService.GetAdmin(id);
+                return Ok(mapper.Map<AdminResponse>(adminModel));
             }
             catch (Exception ex)
             {
@@ -75,11 +85,11 @@ namespace scooters.WebAPI.Controllers
             }
         }
         /// <summary>
-        /// Update User
+        /// Update admin
         /// </summary>
         [HttpPut]
         [Route("{id}")]
-        public IActionResult UpdateUser([FromRoute] Guid id, [FromBody] UpdateUserRequest model)
+        public IActionResult UpdateAdmin([FromRoute] Guid id, [FromBody] UpdateAdminRequest model)
         {
            var validationResult =model.Validate();
            if(!validationResult.IsValid)
@@ -88,8 +98,8 @@ namespace scooters.WebAPI.Controllers
            }
            try
            {
-            var resultModel =UserService.UpdateUser(id,mapper.Map<UpdateUserModel>(model));
-            return Ok(mapper.Map<UserResponse>(resultModel));
+            var resultModel =adminService.UpdateAdmin(id,mapper.Map<UpdateAdminModel>(model));
+            return Ok(mapper.Map<AdminResponse>(resultModel));
            }
            catch(Exception ex)
            {

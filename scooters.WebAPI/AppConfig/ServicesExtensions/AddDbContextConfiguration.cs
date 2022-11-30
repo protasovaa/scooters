@@ -1,7 +1,7 @@
 using scooters.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace scooters.WebAPI.AppConfiguration.ServicesExtensions;
+namespace scooters.WebAPI.AppConfig.ServicesExtensions;
 
 public static partial class ServicesExtensions
 {
