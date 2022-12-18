@@ -4,6 +4,24 @@
         <name>scooters.WebAPI</name>
     </assembly>
     <members>
+        <member name="M:scooters.WebAPI.AppConfig.ApplicationExtensions.AppExtensions.UseAuthorizationConfiguration(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Use serilog configuration
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:scooters.WebAPI.AppConfig.ApplicationExtensions.ApplicationExtensions.UseSwaggerConfiguration(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Use swagger configuration
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:scooters.WebAPI.AppConfig.ServicesExtensions.ServicesExtensions.AddAuthorizationConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Add serilog configuration
+            </summary>
+            <param name="builder"></param>
+        </member>
         <member name="M:scooters.WebAPI.AppConfig.ServicesExtensions.ServicesExtensions.AddDbContextConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Add serilog configuration
@@ -16,7 +34,7 @@
             </summary>
             <param name="builder"></param>
         </member>
-        <member name="M:scooters.WebAPI.AppConfig.ServicesExtensions.ServicesExtensions.AddSwaggerConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:scooters.WebAPI.AppConfig.ServicesExtensions.ServicesExtensions.AddSwaggerConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Add swagger settings
             </summary>
@@ -62,9 +80,9 @@
             Booking controller
             </summary>
         </member>
-        <member name="M:scooters.WebAPI.Controllers.BookingController.CreateBooking(scooters.WebAPI.Models.CreateBookingRequest)">
+        <member name="M:scooters.WebAPI.Controllers.BookingController.CreateBooking(System.Guid,System.Guid,scooters.Services.Models.BookingModel)">
             <summary>
-            create booking
+            create Booking
             </summary>
             <returns></returns>
         </member>
@@ -160,9 +178,9 @@
             Scooter controller
             </summary>
         </member>
-        <member name="M:scooters.WebAPI.Controllers.ScooterController.CreateScooter(scooters.WebAPI.Models.CreateScooterRequest)">
+        <member name="M:scooters.WebAPI.Controllers.ScooterController.CreateScooter(System.Guid,scooters.Services.Models.ScooterModel)">
             <summary>
-            create scooter
+            create Scooter
             </summary>
             <returns></returns>
         </member>
@@ -196,9 +214,9 @@
             UserPenalty controller
             </summary>
         </member>
-        <member name="M:scooters.WebAPI.Controllers.UserPenaltyController.CreateBooking(scooters.WebAPI.Models.CreateUserPenaltyRequest)">
+        <member name="M:scooters.WebAPI.Controllers.UserPenaltyController.CreateUserPenalty(System.Guid,System.Guid,scooters.Services.Models.UserPenaltyModel)">
             <summary>
-            create userPenalty
+            create UserPenalty
             </summary>
             <returns></returns>
         </member>
@@ -223,34 +241,45 @@
             Update UserPenalty
             </summary>
         </member>
-        <member name="T:scooters.WebAPI.Controllers.UserController">
+        <member name="T:scooters.WebAPI.Controllers.UsersController">
             <summary>
             </summary>
         </member>
-        <member name="M:scooters.WebAPI.Controllers.UserController.#ctor(scooters.Services.Abstract.IUserService,AutoMapper.IMapper)">
+        <member name="M:scooters.WebAPI.Controllers.UsersController.#ctor(scooters.Services.Abstract.IUserService,AutoMapper.IMapper)">
             <summary>
-            User controller
+            Users controller
             </summary>
         </member>
-        <member name="M:scooters.WebAPI.Controllers.UserController.GetUsers(System.Int32,System.Int32)">
+        <member name="M:scooters.WebAPI.Controllers.UsersController.GetUsers(System.Int32,System.Int32)">
             <summary>
-            Get User by pages
+            Get users by pages
             </summary>
             <returns></returns>
         </member>
-        <member name="M:scooters.WebAPI.Controllers.UserController.DeleteUser(System.Guid)">
+        <member name="M:scooters.WebAPI.Controllers.UsersController.DeleteUser(System.Guid)">
             <summary>
-            Delete User
+            Delete users
+            </summary>
+            <param name="users"></param>
+        </member>
+        <member name="M:scooters.WebAPI.Controllers.UsersController.GetUser(System.Guid)">
+            <summary>
+            Get user
             </summary>
         </member>
-        <member name="M:scooters.WebAPI.Controllers.UserController.GetUser(System.Guid)">
+        <member name="M:scooters.WebAPI.Controllers.UsersController.UpdateUser(System.Guid,scooters.WebAPI.Models.UpdateUserRequest)">
             <summary>
-            Get User
+            Update users
             </summary>
         </member>
-        <member name="M:scooters.WebAPI.Controllers.UserController.UpdateUser(System.Guid,scooters.WebAPI.Models.UpdateUserRequest)">
+        <member name="T:CityForum.WebApi.Controllers.AuthController">
             <summary>
-            Update User
+            Auth endpoints
+            </summary>
+        </member>
+        <member name="M:CityForum.WebApi.Controllers.AuthController.#ctor(scooters.Services.Abstract.IAuthService,AutoMapper.IMapper)">
+            <summary>
+            Auth controller
             </summary>
         </member>
     </members>

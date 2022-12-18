@@ -1,21 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using scooters.Entities.Models;
 
 namespace scooters.Entities;
-public class Context : DbContext
+public class Context : IdentityDbContext<User, UserRole, Guid>
 {
-    public DbSet<User>? Users { get; set; }
-    public DbSet<City>? Cities { get; set; }
-    public DbSet<Scooter>? Scooters { get; set; }
-    public DbSet<Booking>? Bookings { get; set; }
-    public DbSet<Penalty>? Penalties { get; set; }
-    public DbSet<UserPenalty>? UserPenalties { get; set; }
-    public DbSet<Admin>? Admins { get; set; }
-
     public Context(DbContextOptions<Context> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        base.OnModelCreating(builder);
+
         #region Penalties
 
         builder.Entity<Penalty>().ToTable("penalties");
@@ -44,6 +40,12 @@ public class Context : DbContext
                                     .WithMany(x => x.Users)
                                     .HasForeignKey(x => x.CityId)
                                     .OnDelete(DeleteBehavior.Restrict);
+        builder.Entity<IdentityUserClaim<Guid>>().ToTable("user_claims");
+        builder.Entity<IdentityUserLogin<Guid>>().ToTable("user_logins");
+        builder.Entity<IdentityUserToken<Guid>>().ToTable("user_tokens");
+        builder.Entity<UserRole>().ToTable("user_roles");
+        builder.Entity<IdentityRoleClaim<Guid>>().ToTable("user_role_claims");
+        builder.Entity<IdentityUserRole<Guid>>().ToTable("user_role_owners");
 
         #endregion
 

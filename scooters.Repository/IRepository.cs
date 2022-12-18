@@ -1,11 +1,8 @@
 using System.Linq.Expressions;
 using scooters.Entities.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-
 namespace scooters.Repository;
 
-public interface IRepository<T> where T : BaseEntity
+public interface IRepository<T> where T :class, IBaseEntity
 {
     IQueryable<T> GetAll();
     IQueryable<T> GetAll(Expression<Func<T, bool>> predicate);

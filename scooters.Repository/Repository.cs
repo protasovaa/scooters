@@ -1,26 +1,33 @@
-﻿namespace scooters.Repository;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using scooters.Entities;
 using scooters.Entities.Models;
+using scooters.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-
-
-public class Repository<T> : IRepository<T> where T : BaseEntity
+namespace scooters.Repository;
+public class Repository<T> : IRepository<T> where T :class, IBaseEntity
 {
-    private DbContext _context;
+    private Context _context;
     private ILogger<Repository<T>> logger;
 
-    public Repository(DbContext context, ILogger<Repository<T>> logger)
+    public Repository(Context context, ILogger<Repository<T>> logger)
     {
         _context = context;
         this.logger = logger;
     }
     public void Delete(T obj)
     {
-        _context.Set<T>().Attach(obj);
-        _context.Entry(obj).State = EntityState.Deleted;
-        _context.SaveChanges();
+         try
+        {
+            _context.Set<T>().Attach(obj);
+            _context.Entry(obj).State = EntityState.Deleted;
+            _context.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryException(ex.ToString());
+        }
     }
 
     public IQueryable<T> GetAll()
@@ -37,6 +44,22 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         return _context.Set<T>().FirstOrDefault(x => x.Id == id);
     }
+    private T Insert(T obj)
+    {
+        obj.Init();
+        var result = _context.Set<T>().Add(obj);
+        _context.SaveChanges();
+        return result.Entity;
+    }
+
+    private T Update(T obj)
+    {
+        obj.ModificationTime = DateTime.UtcNow;
+        var result = _context.Set<T>().Attach(obj);
+        _context.Entry(obj).State = EntityState.Modified;
+        _context.SaveChanges();
+        return result.Entity;
+    }
 
     public T Save(T obj)
     {
@@ -44,25 +67,16 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         {
             if (obj.IsNew())
             {
-                obj.Init();
-                var result = _context.Set<T>().Add(obj);
-                _context.SaveChanges();
-                return result.Entity;
+                return Insert(obj);
             }
             else
             {
-                obj.ModificationTime = DateTime.UtcNow;
-                var result = _context.Set<T>().Attach(obj);
-                _context.Entry(obj).State = EntityState.Modified;
-                _context.SaveChanges();
-                return result.Entity;
+                return Update(obj);
             }
         }
         catch (Exception ex)
         {
-            logger.LogError(ex.ToString());
-            throw ex;
+            throw new RepositoryException(ex.ToString());
         }
     }
 }
-

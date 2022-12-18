@@ -1,5 +1,6 @@
 using scooters.Repository;
 using scooters.Services;
+using scooters.WebAPI.AppConfig;
 using scooters.WebAPI.AppConfig.ServicesExtensions;
 using scooters.WebAPI.AppConfig.ApplicationExtensions;
 using Serilog;
@@ -16,12 +17,15 @@ builder.Services.AddDbContextConfiguration(configuration);
 builder.Services.AddVersioningConfiguration();
 builder.Services.AddMapperConfiguration();
 builder.Services.AddControllers();
-builder.Services.AddSwaggerConfiguration();
+builder.Services.AddSwaggerConfiguration(configuration);
 builder.Services.AddRepositoryConfiguration();
 builder.Services.AddBusinessLogicConfiguration();
+builder.Services.AddAuthorizationConfiguration(configuration); //1
 
 
 var app = builder.Build();
+
+await RepositoryInitializer.InitializeRepository(app);
 
 app.UseSerilogConfiguration();
 
@@ -32,7 +36,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthorization();
+app.UseAuthorizationConfiguration(); //2
+app.UseMiddleware(typeof(ExceptionsMiddleware));
 app.MapControllers();
 
 try

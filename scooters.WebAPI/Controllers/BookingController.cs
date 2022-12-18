@@ -25,27 +25,15 @@ namespace scooters.WebAPI.Controllers
             this.BookingService=BookingService;
             this.mapper=mapper;
         }
-        /// <summary>
-        /// create booking
+         /// <summary>
+        /// create Booking
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CreateBooking([FromBody] CreateBookingRequest booking)
+        public IActionResult CreateBooking([FromQuery] Guid UserId, [FromQuery] Guid ScooterId,[FromBody] BookingModel booking)
         {
-            var validationResult = booking.Validate();
-            if (!validationResult.IsValid)
-            {
-                return BadRequest(validationResult.Errors);
-            }
-            try
-            {
-                var resultModel =BookingService.CreateBooking(mapper.Map<CreateBookingModel>(booking));
-                return Ok(resultModel);
-            }
-            catch (Exception e)
-            {
-                    return BadRequest(e);
-            }
+            var response = BookingService.CreateBooking(UserId, ScooterId, booking);
+            return Ok(response);
         }
 
 

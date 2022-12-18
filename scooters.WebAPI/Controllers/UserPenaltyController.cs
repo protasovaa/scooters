@@ -25,27 +25,15 @@ namespace scooters.WebAPI.Controllers
             this.UserPenaltyService=UserPenaltyService;
             this.mapper=mapper;
         }
-        /// <summary>
-        /// create userPenalty
+         /// <summary>
+        /// create UserPenalty
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CreateBooking([FromBody] CreateUserPenaltyRequest userPenalty)
+        public IActionResult CreateUserPenalty([FromQuery] Guid UserId, [FromQuery] Guid PenaltyId,[FromBody] UserPenaltyModel userPenalty)
         {
-            var validationResult = userPenalty.Validate();
-            if (!validationResult.IsValid)
-            {
-                return BadRequest(validationResult.Errors);
-            }
-            try
-            {
-                var resultModel =UserPenaltyService.CreateUserPenalty(mapper.Map<CreateUserPenaltyModel>(userPenalty));
-                return Ok(resultModel);
-            }
-            catch (Exception e)
-            {
-                    return BadRequest(e);
-            }
+            var response = UserPenaltyService.CreateUserPenalty(UserId, PenaltyId, userPenalty);
+            return Ok(response);
         }
 
         

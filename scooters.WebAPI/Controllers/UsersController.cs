@@ -12,44 +12,44 @@ namespace scooters.WebAPI.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    //[Authorize]
+    public class UsersController : ControllerBase
     {
-        private readonly IUserService UserService;
+        private readonly IUserService userServise;
         private readonly IMapper mapper;
 
         /// <summary>
-        /// User controller
+        /// Users controller
         /// </summary>
-        public UserController(IUserService  UserService,IMapper mapper)
+        public UsersController(IUserService userService,IMapper mapper)
         {
-            this.UserService=UserService;
+            this.userServise=userService;
             this.mapper=mapper;
         }
 
         
         /// <summary>
-        /// Get User by pages
+        /// Get users by pages
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         
         public IActionResult GetUsers([FromQuery] int limit = 20, [FromQuery] int offset = 0)
         {
-            var pageModel =UserService.GetUsers(limit,offset);
+            var pageModel =userServise.GetUsers(limit,offset);
 
             return Ok(mapper.Map<PageResponse<UserResponse>>(pageModel));
         }
         /// <summary>
-        /// Delete User
+        /// Delete users
         /// </summary>
-    
+        /// <param name="users"></param>
         [HttpDelete]
-        [Route("{id}")]
         public IActionResult DeleteUser([FromRoute] Guid id)
         {
             try
             {
-                UserService.DeleteUser(id);
+                userServise.DeleteUser(id);
                 return Ok();
             }
             catch(Exception ex)
@@ -58,7 +58,7 @@ namespace scooters.WebAPI.Controllers
             }
         }
         /// <summary>
-        /// Get User
+        /// Get user
         /// </summary>
         [HttpGet]
         [Route("{id}")]
@@ -66,8 +66,8 @@ namespace scooters.WebAPI.Controllers
         {
             try
             {
-                var UserModel =UserService.GetUser(id);
-                return Ok(mapper.Map<UserResponse>(UserModel));
+                var userModel =userServise.GetUser(id);
+                return Ok(mapper.Map<UserResponse>(userModel));
             }
             catch (Exception ex)
             {
@@ -75,7 +75,7 @@ namespace scooters.WebAPI.Controllers
             }
         }
         /// <summary>
-        /// Update User
+        /// Update users
         /// </summary>
         [HttpPut]
         [Route("{id}")]
@@ -88,7 +88,7 @@ namespace scooters.WebAPI.Controllers
            }
            try
            {
-            var resultModel =UserService.UpdateUser(id,mapper.Map<UpdateUserModel>(model));
+            var resultModel = userServise.UpdateUser(id,mapper.Map<UpdateUserModel>(model));
             return Ok(mapper.Map<UserResponse>(resultModel));
            }
            catch(Exception ex)

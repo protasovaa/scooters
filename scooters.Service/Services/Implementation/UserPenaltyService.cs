@@ -56,9 +56,19 @@ existingUserPenalty.IsPaidFor=UserPenalty.IsPaidFor;
 existingUserPenalty = UserPenaltyRepository.Save(existingUserPenalty);
 return mapper.Map<UserPenaltyModel>(existingUserPenalty);
 }
-UserPenaltyModel IUserPenaltyService.CreateUserPenalty(CreateUserPenaltyModel userPenaltyModel)
-{
-var userPenalty= mapper.Map<Entities.Models.UserPenalty>(userPenaltyModel);
-return mapper.Map<UserPenaltyModel>(UserPenaltyRepository.Save(userPenalty));
-}
+public UserPenaltyModel CreateUserPenalty(Guid UserId, Guid PenaltyId,UserPenaltyModel UserPenaltyModel)
+    {
+      if(UserPenaltyRepository.GetAll(x=>x.Id==UserPenaltyModel.Id).FirstOrDefault()!=null)
+      {
+        throw new Exception ("Attempt to create a non-unique object!");
+      }
+      
+        UserPenaltyModel createUserPenalty = new UserPenaltyModel();
+        createUserPenalty.UserId=UserPenaltyModel.UserId;
+        createUserPenalty.PenaltyId=UserPenaltyModel.PenaltyId;
+        createUserPenalty.IsPaidFor=UserPenaltyModel.IsPaidFor;
+        UserPenaltyRepository.Save(mapper.Map<UserPenalty>(createUserPenalty));
+        return createUserPenalty;
+
+    }
 }

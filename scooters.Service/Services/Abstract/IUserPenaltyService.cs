@@ -10,5 +10,5 @@ UserPenaltyModel UpdateUserPenalty(Guid id, UpdateUserPenaltyModel UserPenaltyMo
 void DeleteUserPenalty(Guid id);
 
 PageModel<UserPenaltyPreviewModel> GetUserPenaltys(int limit = 20, int offset = 0);
-UserPenaltyModel CreateUserPenalty(CreateUserPenaltyModel UserPenaltyModel);
+UserPenaltyModel CreateUserPenalty(Guid UserId, Guid PenaltyId, UserPenaltyModel UserPenaltyModel);
 }

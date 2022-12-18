@@ -57,9 +57,20 @@ existingScooter.Price=Scooter.Price;
 existingScooter = ScooterRepository.Save(existingScooter);
 return mapper.Map<ScooterModel>(existingScooter);
 }
-ScooterModel IScooterService.CreateScooter(CreateScooterModel scooterModel)
-{
-var scooter= mapper.Map<Entities.Models.Scooter>(scooterModel);
-return mapper.Map<ScooterModel>(ScooterRepository.Save(scooter));
-}
+public ScooterModel CreateScooter(Guid CityId,ScooterModel ScooterModel)
+    {
+      if(ScooterRepository.GetAll(x=>x.Id==ScooterModel.Id).FirstOrDefault()!=null)
+      {
+        throw new Exception ("Attempt to create a non-unique object!");
+      }
+      
+        ScooterModel createScooter = new ScooterModel();
+        createScooter.CityId=ScooterModel.CityId;
+        createScooter.Address=ScooterModel.Address;
+        createScooter.IsBooking=ScooterModel.IsBooking;
+        createScooter.Price=ScooterModel.Price;
+        ScooterRepository.Save(mapper.Map<Scooter>(createScooter));
+        return createScooter;
+
+    }
 }

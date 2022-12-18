@@ -58,9 +58,21 @@ existingBooking.TimeOfFinish=Booking.TimeOfFinish;
 existingBooking = BookingRepository.Save(existingBooking);
 return mapper.Map<BookingModel>(existingBooking);
 }
-BookingModel IBookingService.CreateBooking(CreateBookingModel bookingModel)
-{
-var booking= mapper.Map<Entities.Models.Booking>(bookingModel);
-return mapper.Map<BookingModel>(BookingRepository.Save(booking));
-}
+public BookingModel CreateBooking(Guid UserId, Guid ScooterId, BookingModel bookingModel)
+    {
+      if(BookingRepository.GetAll(x=>x.Id==bookingModel.Id).FirstOrDefault()!=null)
+      {
+        throw new Exception ("Attempt to create a non-unique object!");
+      }
+      
+        BookingModel createBooking = new BookingModel();
+        createBooking.UserId=bookingModel.UserId;
+        createBooking.ScooterId=bookingModel.ScooterId;
+        createBooking.TimeOfBooking=bookingModel.TimeOfBooking;
+        createBooking.TimeOfFinish=bookingModel.TimeOfFinish;
+        createBooking.TimeOfStart=bookingModel.TimeOfStart;
+        BookingRepository.Save(mapper.Map<Booking>(createBooking));
+        return createBooking;
+
+    }
 }

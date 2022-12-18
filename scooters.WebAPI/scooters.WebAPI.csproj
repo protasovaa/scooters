@@ -23,10 +23,18 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.2"/>
     <PackageReference Include="AutoMapper" Version="12.0.0"/>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0"/>
+    <PackageReference Include="Serilog.Sinks.Seq" Version="5.2.1"/>
+    <PackageReference Include="Duende.IdentityServer" Version="6.1.7"/>
+    <PackageReference Include="Duende.IdentityServer.EntityFramework.Storage" Version="6.1.7"/>
+    <PackageReference Include="Duende.IdentityServer.EntityFramework" Version="6.1.7"/>
+    <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.1.7"/>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10"/>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\scooters.Entity\scooters.Entity.csproj"/>
     <ProjectReference Include="..\scooters.Repository\scooters.Repository.csproj"/>
     <ProjectReference Include="..\scooters.Service\scooters.Service.csproj"/>
+    <ProjectReference Include="..\scooters.Shared\scooters.Shared.csproj"/>
   </ItemGroup>
 </Project>

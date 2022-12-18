@@ -5,9 +5,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
   </ItemGroup>
-   <ItemGroup>
-    <ProjectReference Include="..\scooters.Entity\scooters.Entity.csproj"/>
+  <ItemGroup>
+    <ProjectReference Include="..\scooters.Entity\scooters.Entity.csproj" />
+    <ProjectReference Include="..\scooters.Shared\scooters.Shared.csproj" />
   </ItemGroup>
 </Project>

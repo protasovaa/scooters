@@ -18,5 +18,6 @@ services.AddScoped<IPenaltyService, PenaltyService>();
 services.AddScoped<IScooterService, ScooterService>();
 services.AddScoped<IUserPenaltyService, UserPenaltyService>();
 services.AddScoped<IUserService, UserService>();
+services.AddScoped<IAuthService, AuthService>();
 }
 }

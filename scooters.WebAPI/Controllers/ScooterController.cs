@@ -26,28 +26,15 @@ namespace scooters.WebAPI.Controllers
             this.mapper=mapper;
         }
         /// <summary>
-        /// create scooter
+        /// create Scooter
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CreateScooter([FromBody] CreateScooterRequest scooter)
+        public IActionResult CreateScooter([FromQuery] Guid CityId,[FromBody] ScooterModel scooter)
         {
-            var validationResult = scooter.Validate();
-            if (!validationResult.IsValid)
-            {
-                return BadRequest(validationResult.Errors);
-            }
-            try
-            {
-                var resultModel =ScooterService.CreateScooter(mapper.Map<CreateScooterModel>(scooter));
-                return Ok(resultModel);
-            }
-            catch (Exception e)
-            {
-                    return BadRequest(e);
-            }
+            var response = ScooterService.CreateScooter(CityId, scooter);
+            return Ok(response);
         }
-
         
         /// <summary>
         /// Get Scooter by pages
